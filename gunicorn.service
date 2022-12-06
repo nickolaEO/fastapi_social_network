@@ -1,0 +1,14 @@
+[Unit]
+Description=fastapi application
+After=network.target
+
+[Service]
+User=<your_username >
+Group=<your_username >
+WorkingDirectory=/home/<your_username >/app/src/
+Environment="PATH=/home/<your_username >/app/venv/bin"
+EnvironmentFile=/home/<your_username >/.env
+ExecStart=/home/<your_username >/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
